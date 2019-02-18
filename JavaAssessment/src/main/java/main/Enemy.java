@@ -7,8 +7,9 @@ public class Enemy extends WorldObject implements EntityActions {// i was finish
 	public Enemy(int x, int y, boolean active) {
 		this.setxLoc(x);
 		this.setyLoc(y);
-		this.setActive(false);
+		this.setActive(true);
 		this.setInteracted(true);
+		this.setFlavourText("O BABY ITS A BEAST FROM THE SWAMP");
 	}
 
 	public void Move(Actions direct) {
@@ -24,17 +25,18 @@ public class Enemy extends WorldObject implements EntityActions {// i was finish
 	}
 
 	public void takeTurn(World world) {
-		if (active) {
+		if (active) {	
 			if (this.getxLoc() > world.retPlayer().getxLoc())
 				this.Move(Actions.WEST);
 			else if (this.getxLoc() < world.retPlayer().getxLoc())
 				this.Move(Actions.EAST);
 			else if (this.getyLoc() < world.retPlayer().getyLoc())
 				this.Move(Actions.NORTH);
-			else if (this.getyLoc() < world.retPlayer().getyLoc())
+			else if (this.getyLoc() > world.retPlayer().getyLoc())
 				this.Move(Actions.SOUTH);
-			else
-				System.out.println("O BABY ITS A BEAST FROM THE SWAMP");
+			
+			System.out.println(this.getxLoc() + "," + this.getyLoc());
+
 		}
 	}
 
@@ -45,8 +47,10 @@ public class Enemy extends WorldObject implements EntityActions {// i was finish
 
 	@Override
 	public float calcDist(WorldObject obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int xDist = Math.abs(Math.abs(this.getxLoc())- Math.abs(obj.getxLoc()));
+		int yDist = Math.abs(Math.abs(this.getyLoc())- Math.abs(obj.getyLoc()));
+		float totalDist = (float) Math.sqrt((xDist * xDist) + (yDist * yDist));	
+		return totalDist;
 	}
 
 	@Override

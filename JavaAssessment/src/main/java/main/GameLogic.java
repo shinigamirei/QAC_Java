@@ -36,18 +36,16 @@ public class GameLogic {
 				this.findClosest();
 			} else if (input.equals(Actions.QUIT)) {
 				finished = !finished;
-			} else if (input.equals(Actions.INTERRACT))
-			{
-				for (int i =1; i < gameWorld.getEntities().size(); i++) {
+			} else if (input.equals(Actions.INTERRACT)) {
+				for (int i = 1; i < gameWorld.getEntities().size(); i++) {
 					if (gameWorld.getEntities().get(i).calcDist(gameWorld.retPlayer()) == 0)
-					
-					gameWorld.retPlayer().interract(gameWorld.getEntities().get(i));
+
+						gameWorld.retPlayer().interract(gameWorld.getEntities().get(i));
 				}
-			}
-			else
+			} else
 				System.out.println("invalid input fool");
-			
-			for (int i =1; i < gameWorld.getEntities().size(); i++) {
+
+			for (int i = 1; i < gameWorld.getEntities().size(); i++) {
 				gameWorld.getEntities().get(i).takeTurn(gameWorld);
 			}
 		}
@@ -56,14 +54,15 @@ public class GameLogic {
 	public void findClosest() {
 		float closestDist = 1000;// will almost always be the highest value
 		for (int i = 1; i < gameWorld.getEntities().size(); i++) {// start from 1 as 0 is player
+			float dist = gameWorld.getEntities().get(i).calcDist(gameWorld.retPlayer());
 			if (gameWorld.getEntities().get(i).getInteracted() == false) {
-				float dist = gameWorld.getEntities().get(i).calcDist(gameWorld.retPlayer());
 				if (dist < closestDist) {
 					closestDist = dist;
-					if (dist == 0)
-						System.out.println(gameWorld.getEntities().get(i).getFlavourText());
+
 				}
 			}
+			if (dist == 0)
+				System.out.println(gameWorld.getEntities().get(i).getFlavourText());
 		}
 
 		System.out.println("The Dial reads " + closestDist);
