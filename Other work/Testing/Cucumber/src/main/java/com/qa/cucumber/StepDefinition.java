@@ -29,7 +29,7 @@ public class StepDefinition {
 
 	@When("^I navigate to the 'Menu' page$")
 	public void i_navigate_to_the_Menu_page() throws Throwable {
-		teaMenu.getTo();
+		teaMenu.getTo(driver);
 	}
 
 	@Then("^I can browse a list of the available products\\.$")

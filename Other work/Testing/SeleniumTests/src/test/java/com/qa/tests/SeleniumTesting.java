@@ -2,6 +2,7 @@ package com.qa.tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,12 +21,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.qa.DemoSite.DemoSiteLoginPage;
 import com.qa.DemoSite.DemoSiteNewAccPage;
+import com.qa.main.CookieClicker;
 import com.qa.main.UIDraw;
 
 public class SeleniumTesting {
@@ -35,6 +38,9 @@ public class SeleniumTesting {
 	@Before
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "C:/Users/Admin/Desktop/chromedriver.exe");
+		
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--headless");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
@@ -45,7 +51,7 @@ public class SeleniumTesting {
 		driver.quit();
 	}
 
-	@Ignore
+	
 	@Test
 	public void methodTest() {
 		driver.get("http://www.youtube.com");
@@ -54,7 +60,7 @@ public class SeleniumTesting {
 		driver.findElementById("search-icon-legacy").click();
 	}
 
-	@Ignore
+	
 	@Test
 	public void newUserAndLogin() {
 		driver.get("http://thedemosite.co.uk/");
@@ -76,7 +82,7 @@ public class SeleniumTesting {
 
 	}
 
-	@Ignore
+	
 	@Test
 	public void dressSearch() {
 		driver.get("http://automationpractice.com/index.php");
@@ -89,7 +95,7 @@ public class SeleniumTesting {
 
 	}
 
-	@Ignore
+	
 	@Test
 	public void lovelyNewDress() throws InterruptedException {
 		driver.get("http://automationpractice.com/index.php");
@@ -104,6 +110,7 @@ public class SeleniumTesting {
 
 	}
 
+	
 	@Test
 	public void drawTest() throws InterruptedException, FileNotFoundException {
 		driver.get("https://www.youidraw.com/apps/painter/");
@@ -144,7 +151,7 @@ public class SeleniumTesting {
 		}
 	}
 
-	@Ignore
+	
 	@Test
 	public void implicitHateTest() {
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -153,7 +160,7 @@ public class SeleniumTesting {
 		assertEquals("-The Shafeeq", dynamicElement.getText());
 	}
 
-	@Ignore
+	
 	@Test
 	public void explicitHateTest() {
 		driver.get("https://christophperrins.github.io/TestingSite/");
@@ -162,5 +169,16 @@ public class SeleniumTesting {
 
 		assertEquals("-The Shafeeq", myDynamicElement.getText());
 	}
+	
+	@Ignore
+	@Test
+	public void cookies() {
+		driver.get("http://orteil.dashnet.org/cookieclicker/");
 
+		CookieClicker cookies = PageFactory.initElements(driver, CookieClicker.class);
+		while(true) {
+		cookies.clickCookie(driver);
+		cookies.buyUpgrades(driver);
+		}
+	}
 }

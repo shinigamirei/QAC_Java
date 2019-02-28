@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class ParamatizedExcel {
+public class ParamatizedExcelTest {
 
 	@Parameters
 	public static Collection<Object[]> data() throws Exception {
@@ -47,7 +47,7 @@ public class ParamatizedExcel {
 	public String contentsD;
 	public String contentsE;
 
-	public ParamatizedExcel(String contentA, String contentB, String contentC, String contentD, String contentE) {
+	public ParamatizedExcelTest(String contentA, String contentB, String contentC, String contentD, String contentE) {
 		this.contentsA = contentA;
 		this.contentsB = contentB;
 		this.contentsC = contentC;
